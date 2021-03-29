@@ -6,10 +6,11 @@ import { Setting } from "../models";
 
 interface IProps {
   onAddNew: () => void;
-  onRowClick: (setting: Setting | undefined) => void;
+  onRowClick: (setting: Setting) => void;
+  onDelete: (setting: Setting) => void
 }
 
-export const SettingsTable = ({ onAddNew, onRowClick }: IProps) => {
+export const SettingsTable = ({ onAddNew, onRowClick, onDelete }: IProps) => {
   const [rows, setRows] = React.useState([]);
 
   React.useEffect(() => {
@@ -31,6 +32,7 @@ export const SettingsTable = ({ onAddNew, onRowClick }: IProps) => {
       columns={SettingsColumns}
       onAddNew={onAddNew}
       onRowClick={onRowClick}
+      onDelete={onDelete}
     />
   );
 };

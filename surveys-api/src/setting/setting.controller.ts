@@ -1,6 +1,14 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Body,
+  Query,
+} from '@nestjs/common';
 import { SettingService } from './setting.service';
-import { Setting } from './setting.schema';
+import { Setting, SettingDocument } from './setting.schema';
 
 @Controller('settings')
 export class SettingController {
@@ -12,5 +20,15 @@ export class SettingController {
   @Post()
   async createSetting(@Body() setting: Setting): Promise<Setting> {
     return await this.settingService.create(setting);
+  }
+
+  @Put()
+  async updateSetting(@Body() setting: SettingDocument): Promise<Setting> {
+    return await this.settingService.update(setting);
+  }
+
+  @Delete()
+  async deleteSetting(@Query('id') id: string): Promise<boolean> {
+    return await this.settingService.delete(id);
   }
 }

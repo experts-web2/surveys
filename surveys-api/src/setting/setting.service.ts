@@ -17,4 +17,13 @@ export class SettingService {
     const newSetting = new this.model(setting);
     return await newSetting.save();
   }
+
+  async update(setting: SettingDocument): Promise<Setting> {
+    return await this.model.findByIdAndUpdate(setting._id, setting);
+  }
+
+  async delete(_id: string): Promise<boolean> {
+    await this.model.deleteOne({ _id });
+    return true;
+  }
 }

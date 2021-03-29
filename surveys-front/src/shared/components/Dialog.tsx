@@ -12,6 +12,7 @@ interface IProps {
 
 export const Dialog = ({
   open,
+  title,
   handleClose,
   handleOk,
   children,
@@ -20,7 +21,7 @@ export const Dialog = ({
   return (
     <Modal show={open} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
+        <Modal.Title>{title}</Modal.Title>
       </Modal.Header>
       <Modal.Body>{children}</Modal.Body>
       <Modal.Footer>

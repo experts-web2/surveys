@@ -19,4 +19,5 @@ export const SettingControls: { label: string; value: ESettingControls }[] = [
   { label: "Radio", value: ESettingControls.RADIO },
   { label: "Checkbox", value: ESettingControls.CHECKBOX },
   { label: "Slider", value: ESettingControls.SLIDER },
+  { label: "Dropdown", value: ESettingControls.DROPDOWN },
 ];

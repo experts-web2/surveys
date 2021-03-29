@@ -15,6 +15,7 @@ export const UsersTable = () => {
       columns={UsersColumns}
       onAddNew={console.log}
       onRowClick={console.log}
+      onDelete={console.log}
     />
   );
 };

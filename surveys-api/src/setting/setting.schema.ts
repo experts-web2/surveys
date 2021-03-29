@@ -10,16 +10,10 @@ export class Setting {
   label: string;
 
   @Prop()
-  type: string;
-
-  @Prop()
   control: string;
 
   @Prop()
   options: string[];
-
-  @Prop({})
-  value: string;
 }
 
 export const SettingSchema = SchemaFactory.createForClass(Setting);

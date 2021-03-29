@@ -4,11 +4,10 @@ export interface IColumn {
 }
 
 export class Setting {
+  _id: string = ""
   label: string = "";
-  type: string = "";
-  control: string = "Choose";
+  control: ESettingControls | "Choose" = "Choose";
   options: string[] = [];
-  value: string = "";
 }
 
 export enum ESettingControls {
