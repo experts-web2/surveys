@@ -1,21 +1,28 @@
 import React from "react";
 import { Table } from "../shared/components";
 import { UsersColumns } from "../constants";
+import { User } from "../models";
 
-export const UsersTable = () => {
-  const [rows, setRows] = React.useState([]);
+interface IProps {
+  data: User[];
+  onAddNew: () => void;
+  onRowClick: (user: User) => void;
+  onDelete: (user: User) => void;
+}
 
-  React.useEffect(function getUsers() {
-    //Todo
-  }, []);
-
+export const UsersTable = ({
+  data,
+  onAddNew,
+  onRowClick,
+  onDelete,
+}: IProps) => {
   return (
     <Table
-      rows={rows}
+      rows={data}
       columns={UsersColumns}
-      onAddNew={console.log}
-      onRowClick={console.log}
-      onDelete={console.log}
+      onAddNew={onAddNew}
+      onRowClick={onRowClick}
+      onDelete={onDelete}
     />
   );
 };

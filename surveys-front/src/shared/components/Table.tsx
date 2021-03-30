@@ -19,7 +19,7 @@ export const Table = <T extends unknown>({
 }: IProps<T>) => {
   return (
     <React.Fragment>
-      <Button onClick={onAddNew}>Add New Setting</Button>
+      <Button onClick={onAddNew}>Add New</Button>
       <BootstrapTable striped bordered hover>
         <thead>
           <tr>

@@ -12,23 +12,23 @@ import { Setting, SettingDocument } from './setting.schema';
 
 @Controller('settings')
 export class SettingController {
-  constructor(private readonly settingService: SettingService) {}
+  constructor(private readonly service: SettingService) {}
   @Get() async getSettings(): Promise<Setting[]> {
-    return await this.settingService.getAll();
+    return await this.service.getAll();
   }
 
   @Post()
   async createSetting(@Body() setting: Setting): Promise<Setting> {
-    return await this.settingService.create(setting);
+    return await this.service.create(setting);
   }
 
   @Put()
   async updateSetting(@Body() setting: SettingDocument): Promise<Setting> {
-    return await this.settingService.update(setting);
+    return await this.service.update(setting);
   }
 
   @Delete()
   async deleteSetting(@Query('id') id: string): Promise<boolean> {
-    return await this.settingService.delete(id);
+    return await this.service.delete(id);
   }
 }

@@ -3,6 +3,11 @@ export interface IColumn {
   value: string;
 }
 
+export enum Role {
+  ADMIN = 'ADMIN',
+  USER = 'USER',
+}
+
 export class Setting {
   _id: string = ""
   label: string = "";
@@ -18,4 +23,11 @@ export enum ESettingControls {
   CHECKBOX = "checkbox",
   SLIDER = "slider",
   DROPDOWN = "dropdown"
+}
+
+export class User {
+  _id: string = ""
+  name: string = "";
+  role: Role | "Choose" = "Choose"
+  settings: string[] = []
 }

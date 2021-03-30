@@ -1,16 +1,35 @@
 import React from "react";
 import { SettingsTable, SettingsFormDialog } from "../../components";
-import { createSetting, updateSetting, deleteSetting } from "../../services/settings.service";
+import {
+  createSetting,
+  updateSetting,
+  deleteSetting,
+  getAll,
+} from "../../services/settings.service";
 import { Setting } from "../../models";
 
 export const Settings = () => {
+  const [settings, setSettings] = React.useState<Setting[]>([]);
   const [openDialog, setDialog] = React.useState(false);
   const [isEdit, setEdit] = React.useState(false);
   const [selectedSetting, setSelectedSetting] = React.useState<
     Setting | undefined
   >(undefined);
 
-  const handleRowClick = (setting: Setting) => {
+  React.useEffect(() => {
+    getSettings();
+  }, []);
+
+  const getSettings = async () => {
+    try {
+      const response = await getAll();
+      setSettings(response);
+    } catch (error) {
+      console.log({ error });
+    }
+  };
+
+  const handleEdit = (setting: Setting) => {
     setSelectedSetting(setting);
     setEdit(true);
     setDialog(true);
@@ -22,6 +41,8 @@ export const Settings = () => {
       setDialog(false);
     } catch {
       setDialog(false);
+    } finally {
+      getSettings()
     }
   };
 
@@ -29,22 +50,26 @@ export const Settings = () => {
     try {
       await updateSetting(setting);
       setDialog(false);
-      setEdit(false)
-      setSelectedSetting(undefined)
+      setEdit(false);
+      setSelectedSetting(undefined);
     } catch {
       setDialog(false);
-      setEdit(false)
-      setSelectedSetting(undefined)
+      setEdit(false);
+      setSelectedSetting(undefined);
+    } finally {
+      getSettings()
     }
   };
 
   const onDelete = async ({ _id }: Setting) => {
     try {
-      await deleteSetting(_id)
-    } catch {
-
+      await deleteSetting(_id);
+    } catch (error) {
+      console.log({ error });
+    } finally {
+      getSettings()
     }
-  }
+  };
 
   return (
     <React.Fragment>
@@ -57,8 +82,9 @@ export const Settings = () => {
         closeDialog={() => setDialog(false)}
       />
       <SettingsTable
+        data={settings}
         onAddNew={() => setDialog(true)}
-        onRowClick={handleRowClick}
+        onRowClick={handleEdit}
         onDelete={onDelete}
       />
     </React.Fragment>

@@ -1,34 +1,19 @@
 import React from "react";
 import { Table } from "../shared/components";
 import { SettingsColumns } from "../constants";
-import { getAll } from "../services/settings.service";
 import { Setting } from "../models";
 
 interface IProps {
+  data: Setting[]
   onAddNew: () => void;
   onRowClick: (setting: Setting) => void;
   onDelete: (setting: Setting) => void
 }
 
-export const SettingsTable = ({ onAddNew, onRowClick, onDelete }: IProps) => {
-  const [rows, setRows] = React.useState([]);
-
-  React.useEffect(() => {
-    getSettings();
-  }, []);
-
-  const getSettings = async () => {
-    try {
-      const settings = await getAll();
-      setRows(settings);
-    } catch (error) {
-      console.log({ error });
-    }
-  };
-
+export const SettingsTable = ({ data, onAddNew, onRowClick, onDelete }: IProps) => {
   return (
     <Table
-      rows={rows}
+      rows={data}
       columns={SettingsColumns}
       onAddNew={onAddNew}
       onRowClick={onRowClick}

@@ -6,19 +6,25 @@ import { Setting, ESettingControls } from "../models";
 interface IProps {
   open: boolean;
   isEdit: boolean;
-  editData: Setting | undefined
+  editData: Setting | undefined;
   saveSettings: (settings: Setting) => void;
   updateSettings: (settings: Setting) => void;
-  closeDialog: () => void
+  closeDialog: () => void;
 }
 
-export const SettingsFormDialog = ({ open, isEdit, saveSettings, closeDialog, editData, updateSettings }: IProps) => {
+export const SettingsFormDialog = ({
+  open,
+  isEdit,
+  saveSettings,
+  closeDialog,
+  editData,
+  updateSettings,
+}: IProps) => {
   const [settings, setSettings] = React.useState<Setting>(() => new Setting());
 
   React.useEffect(() => {
-    console.log({editData})
-    if(isEdit) setSettings(editData as Setting)
-  }, [isEdit, editData])
+    if (isEdit) setSettings(editData as Setting);
+  }, [isEdit, editData]);
 
   /**
    *
@@ -42,9 +48,9 @@ export const SettingsFormDialog = ({ open, isEdit, saveSettings, closeDialog, ed
     !settings.label || settings.control === "Choose" || !isOptionsPopulated();
 
   const handleOk = () => {
-    if(isEdit) updateSettings(settings)
+    if (isEdit) updateSettings(settings);
     else saveSettings(settings);
-    setSettings(new Setting())
+    setSettings(new Setting());
   };
 
   const addNewOption = (option: string) => {
@@ -52,8 +58,8 @@ export const SettingsFormDialog = ({ open, isEdit, saveSettings, closeDialog, ed
   };
 
   const handleClose = () => {
-    closeDialog()
-    setSettings(new Setting())
+    closeDialog();
+    setSettings(new Setting());
   };
 
   return (

@@ -1,7 +1,7 @@
 import { axiosInstance as axios } from "./axios.service";
 import { Setting } from "../models";
 
-export const getAll = async () => {
+export const getAll = async (): Promise<Setting[]> => {
   try {
     const response = await axios.get("/settings");
     return response.data;
